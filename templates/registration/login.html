@@ -1,0 +1,34 @@
+{% extends "base.html"%}
+
+{% block title%}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center mt-5" style="min-height: 600px;">
+    <div class="row">
+		<form method="POST" style="min-width: 40vw;" >
+			{% csrf_token %}
+			{{form|crispy}}
+			<div class="d-flex justify-content-end">
+                <button type="submit" class="btn  btn-info">Login</button>
+                </button>
+
+            </div>
+
+			<hr>
+			<div class="d-flex justify-content-center">
+                <small class="text-muted">
+                    You Do Not  Have An Account? <a class="ml-2" href="{% url "register" %}">Sign
+                    Up</a>
+                </small>
+            </div>
+		</form>
+
+
+	</div>
+</div>
+
+{% endblock %}

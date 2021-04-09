@@ -1,0 +1,43 @@
+{% load helpers %}
+<ul class="pagination">
+
+    {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link"  href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}">Previous</a></li>
+    {% else %}
+     <li class="page-item disabled"><a href="#" onclick="return false;">Previous</a></li>
+    {% endif %}
+    {% if page_obj.number > 4 %}
+        <li class="page-item">
+            <a class="page-link" href="{% relative_url 1 'page' request.GET.urlencode %}">1</a>
+        </li>
+         <li class="page-item" disabled="disabled">
+            <a class="page-link" href="#" onclick="return false;">...</a>
+        </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <li class="page-item active"><a href="{% relative_url num 'page' request.GET.urlencode %}" class="page-link">{{num}}</a>
+        </li>
+        {% elif num > page_obj.number|add:'-4' and num < page_obj.number|add:'4' %}
+        <li class="page-item"><a href="{% relative_url num 'page' request.GET.urlencode %}" class="page-link">{{num}}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.number < page_obj.paginator.num_pages|add:'-3'%}
+        <li class="page-item" disabled="disabled">
+            <a class="page-link" href="#" onclick="return false;">...</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{% relative_url page_obj.paginator.num_pages 'page' request.GET.urlencode %}">{{ page_obj.paginator.num_pages }}</a>
+        </li>
+
+    {% endif %}
+
+
+    {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}">Next</a></li>
+    {% else %}
+        <li class="page-item disabled"><a href="#" onclick="return false;">Next</a></li>
+    {% endif %}
+</ul>

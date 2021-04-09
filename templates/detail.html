@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container w-100"  style="min-height: 80vh">
+
+    <div class="row text-dark">
+        
+        <a href="{% url "medicines:list" %}" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Back</a>
+        <div class="my-3 p-3 bg-light rounded box-shadow w-100">
+            <h5 class="text-dark">{{object.pharmacy.name}}</h5>
+            <hr>
+            <h6>To Contact with pharmacy</h6>
+            <div class="d-flex flex-column mt-3">
+                <h6><strong>Phone number: </strong> {{object.pharmacy.phone_number}}</h6>
+                <h6><strong>Region: </strong> {{object.pharmacy.district.region.name}}</h6>
+                <h6><strong>District: </strong> {{object.pharmacy.district.name}}</h6>
+                <h6><strong>Address: </strong> {{object.pharmacy.address}}</h6>
+                <h6><strong>Working hours : </strong>
+                    {% if object.pharmacy.works_day_and_night %}
+                        24/7
+                    {% else %}
+                    {{object.pharmacy.work_from}}-{{object.pharmacy.work_to}}
+                    {% endif %}</h6>
+            </div>
+        </div>
+        <div class="my-3 p-3 bg-light rounded box-shadow w-100">
+            <h5 class="text-dark">{{object.medicine.title}}</h5>
+            <hr>
+            <h6>About Medicine</h6>
+            <div class="d-flex flex-column mt-3">
+                <h6><strong>Barcode: </strong> {{object.medicine.barcode}}</h6>
+                <h6><strong>Meidicne Type: </strong> {{object.medicine.medicine_type}}</h6>
+                <h6><strong>Manufacturer: </strong> {{object.medicine.manufacturer}}</h6>
+                <h6><strong>Description: </strong> {{object.medicine.description}}</h6>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

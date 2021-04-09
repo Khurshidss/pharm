@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Medicines</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+
+    <link rel="stylesheet" href='{% static "/local/css/animate.css" %}'>
+    <link rel="stylesheet" href='{% static "/local/css/footer.css" %}'>
+    <link rel="stylesheet" href=' {% static "/local/css/media-queries.css" %}'>
+    <link rel="stylesheet" href='{% static "/local/css/main.css" %}'>
+
+
+</head>
+<body>
+
+
+<div class="table-wrapper">
+    <div class="table-title">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <a href="{% url "medicines:list" %}"><h3 class="text-white"> <b>MyPharm24</b></h3></a>
+                <div class="mr-4 d-flex align-items-center">
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff %}
+                        <a class="InkPharm" href="{% url "admin:index" %}">Admin Page</a>
+                        </div>
+                    {% endif %}
+                    <a class="text-white mt-2" href="{% url "logout" %}"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+                {% else %}
+                    <a class="text-white" href="{% url "login" %}"><i class="fas fa-sign-in-alt fa-2x"></i></a>
+                {% endif %}
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div >
+            <p>
+                <img src="static/local/css/download.jpg"  alt="images" 
+                width="1105px"
+                height="350px">
+            </p>
+        </div>
+
+
+    </div>
+    
+
+    <div class="container main-container">
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+</div>
+<footer>
+    <div class="footer-top">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-md-4 col-lg-4 footer-about wow fadeInUp animated footer-animation-up">
+                    <h3>About Us</h3>
+                    <p>
+                        We are a young company always looking for new and
+                        creative ideas to help you with our products in your
+                        everyday work.
+                    </p>
+                    <p><a href="#">Our Team</a></p>
+                </div>
+                <div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown animated footer-animation-down">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i>WUIT</p>
+                    <p><i class="fas fa-phone"></i> Phone: +998 (33) 884-85-85 
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope"></i> Email: <a
+                            href="mailto:00006998@gmail.com">00006998@gmail.com</a>
+                    </p>
+
+                </div>
+                <div class="col-md-4 col-lg-3 footer-social wow fadeInUp animated footer-animation-up">
+                    <h3>Follow us</h3>
+                    <p>
+                        <a href="Facebook.com"><i class="fab fa-facebook"></i></a>
+                        <a href="Twitter.com"><i class="fab fa-twitter"></i></a>
+                        <a href="google.com"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="instagram.com"><i class="fab fa-instagram"></i></a>
+                        <a href="pinteres.com"><i class="fab fa-pinterest"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+{% block additional_js %}
+
+{% endblock %}
+</body>
+</html>
